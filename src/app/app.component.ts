@@ -25,10 +25,23 @@ export class AppComponent {
   tradeList: Trade[] = [];
   sl = 0;
   totalPL = 0;
+  addition = 20;
+  newEntry = 0;
   constructor() {}
 
   onAdd(): void {
     this.tradeList.push(new Trade(this.qty, this.entry));
+    this.totalQty = this.tradeList.length * this.qty;
+    this.averageEntry = this.getAverageEntry();
+    this.sl = this.calculateStopLoss();
+    this.calculateProfit();
+    this.totalPL = this.calculateTotalPL();
+    this.newEntry = this.entry;
+  }
+
+  onAddMore(): void {
+    this.newEntry += this.addition;
+    this.tradeList.push(new Trade(this.qty, this.newEntry));
     this.totalQty = this.tradeList.length * this.qty;
     this.averageEntry = this.getAverageEntry();
     this.sl = this.calculateStopLoss();
