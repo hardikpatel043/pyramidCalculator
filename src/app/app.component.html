@@ -85,17 +85,9 @@
           <tr *ngFor="let trade of tradeList">
             <td scope="row">{{ trade.qty }}</td>
             <td>{{ trade.entry }}</td>
-            <td>152</td>
+            <td>{{ trade.pl }}</td>
           </tr>
         </tbody>
-
-        <tfoot class="footer">
-          <tr>
-            <td scope="row">{{ totalQty }}</td>
-            <td>{{ averageEntry }}</td>
-            <td>256</td>
-          </tr>
-        </tfoot>
       </table>
     </div>
 
@@ -115,6 +107,19 @@
           <li class="list-group-item d-flex justify-content-between">
             <span class="text-success">Total Profit/Loss</span>
             <strong class="text-success">$20</strong>
+          </li>
+          <li class="list-group-item d-flex justify-content-between bg-light">
+            <div class="text-primary">
+              <span class="my-0">Average Entry Price</span>
+            </div>
+            <strong class="text-primary">{{ averageEntry }}</strong>
+          </li>
+
+          <li class="list-group-item d-flex justify-content-between bg-light">
+            <div class="text-primary">
+              <span class="my-0">Total Qty</span>
+            </div>
+            <strong class="text-primary">{{ totalQty }}</strong>
           </li>
         </ul>
       </div>
