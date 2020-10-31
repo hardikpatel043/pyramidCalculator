@@ -26,6 +26,7 @@
           class="form-control"
           id="basic-url"
           aria-describedby="basic-addon3"
+          [(ngModel)]="risk"
         />
       </div>
 
@@ -36,6 +37,7 @@
           class="form-control"
           id="basic-url"
           aria-describedby="basic-addon3"
+          [(ngModel)]="qty"
         />
       </div>
     </div>
@@ -54,14 +56,21 @@
 
         <button type="submit" class="btn btn-primary">Add</button>
       </form> -->
-    <form class="action">
+    <div class="action">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Entry Price" />
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="entry"
+          placeholder="Entry Price"
+        />
         <div class="input-group-append">
-          <button type="submit" class="btn btn-secondary">Add</button>
+          <button type="submit" class="btn btn-secondary" (click)="onAdd()">
+            Add
+          </button>
         </div>
       </div>
-    </form>
+    </div>
 
     <div class="summary">
       <table class="table table-striped">
@@ -73,26 +82,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td scope="row">25</td>
-            <td>11500</td>
+          <tr *ngFor="let trade of tradeList">
+            <td scope="row">{{ trade.qty }}</td>
+            <td>{{ trade.entry }}</td>
             <td>152</td>
           </tr>
-          <tr>
-            <td scope="row">25</td>
-            <td>11550</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td scope="row">25</td>
-            <td>11600</td>
-            <td>-562</td>
-          </tr>
         </tbody>
+
         <tfoot class="footer">
           <tr>
-            <td scope="row">75</td>
-            <td>11546</td>
+            <td scope="row">{{ totalQty }}</td>
+            <td>{{ averageEntry }}</td>
             <td>256</td>
           </tr>
         </tfoot>
@@ -110,7 +110,7 @@
             <div class="text-danger">
               <span class="my-0">Current STOP LOSS</span>
             </div>
-            <strong class="text-danger">11566</strong>
+            <strong class="text-danger">{{ sl }}</strong>
           </li>
           <li class="list-group-item d-flex justify-content-between">
             <span class="text-success">Total Profit/Loss</span>
